@@ -9,7 +9,8 @@ function orderCake() {
 
 //state => has to be a single obgect
 const initialState = {
-    numberOfCakes: 10
+    numberOfCakes: 10,
+    anotherProperty: 2,
 }
 
 //(previousState, action) => newState
@@ -17,6 +18,7 @@ export default (state = initialState, action) => {
     switch(action.type) {
         case CAKE_ORDERED:
             return {
+                ...state,
                 numberOfCakes: state.numberOfCakes - 1
             }
             default:
