@@ -128,13 +128,13 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
 }
 
 
-//combine all reducer
+//combine reducers with redux.combineReducer()
 const rootReducer = combinReducer({
     cake: cakeReducer,
     iceCream: iceCreamReducer
 })
 
-//redux store holding the aplicatio state, reducer has th einitial state
+//create store, redux store holding the aplicatio state, reducer has the initial state
 const store = createStore(rootReducer)
 
 //access to state via getState()
