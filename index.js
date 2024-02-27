@@ -16,8 +16,6 @@ function orderCake() {
     }
 }
 
-
-
 //action creator for restocked cake
 function restockedCake(qty = number) {
     return {
@@ -43,37 +41,87 @@ function restockedIceCream(qty = number) {
 }
 
 //state => has to be a single obgect
-const initialState = {
-    numberOfCakes: 10,
-    numberOfIceCreams: 15,
-}
+
+// const initialState = {
+//     numberOfCakes: 10,
+//     numberOfIceCreams: 15,
+// }
+
+
 
 //(previousState, action) => newState
-const reducer = (state = initialState, action) => {
+
+// const reducer = (state = initialState, action) => {
+//     switch(action.type) {
+//         case CAKE_ORDERED:
+//             return {
+//                 ...state,
+//                 numberOfCakes: state.numberOfCakes - 1
+//             }
+//             case CAKE_RESTOCKED:
+//                 return {
+//                     ...state,
+//                     numberOfCakes: state.numberOfCakes + action.payload
+//                 }
+//             case ICECREAM_ORDERED:
+//                 return {
+//                     ...state,
+//                     numberOfIceCreams: state.numberOfIceCreams - 1
+//                 }
+//             case ICECREAM_RESTOCKED:
+//                 return {
+//                     ...state,
+//                     numberOfIceCreams: state.numberOfIceCreams + action.payload
+//                 }
+                
+//             default:
+//                 return state
+//     }
+// }
+
+//create seprate state for cake and iceCream
+const initialCakeState = {
+    numOfCakes: 10
+}
+
+const initialIceCreamState = {
+    numOfIceCream: 15
+}
+
+//seprate reducer for cake and iceCream
+const cakeReducer = (state = initialCakeState, action) => {
     switch(action.type) {
         case CAKE_ORDERED:
             return {
                 ...state,
-                numberOfCakes: state.numberOfCakes - 1
+                numOfCakes: state.numOfCakes -1
+
             }
             case CAKE_RESTOCKED:
                 return {
                     ...state,
-                    numberOfCakes: state.numberOfCakes + action.payload
+                    numOfCakes: state.numOfCakes + action.payload
                 }
-            case ICECREAM_ORDERED:
-                return {
-                    ...state,
-                    numberOfIceCreams: state.numberOfIceCreams - 1
-                }
+                default:
+                    return state
+    }
+}
+
+const iceCreamReducer = (state = initialIceCreamState, action) => {
+    switch(action.type) {
+        case ICECREAM_ORDERED:
+            return {
+                ...state,
+                numOfIceCream: state.numOfIceCream -1
+
+            }
             case ICECREAM_RESTOCKED:
                 return {
                     ...state,
-                    numberOfIceCreams: state.numberOfIceCreams + action.payload
+                    numOfIceCream: state.numOfIceCream + action.payload
                 }
-                
-            default:
-                return state
+                default:
+                    return state
     }
 }
 
