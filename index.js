@@ -1,5 +1,7 @@
 const redux = require('redux');
 const createStore = redux.createStore;
+const bindActionCreators = redux.bindActionCreators;
+const combinReducer = redux.combineReducers;
 
 const CAKE_ORDERED = 'CAKE_ORDERD';
 const CAKE_RESTOCKED = "CAKE_RESTOCKED"
@@ -126,8 +128,14 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
 }
 
 
+//combine all reducer
+const rootReducer = combinReducer({
+    cake: cakeReducer,
+    iceCream: iceCreamReducer
+})
+
 //redux store holding the aplicatio state, reducer has th einitial state
-const store = createStore(reducer)
+const store = createStore(rootReducer)
 
 //access to state via getState()
 console.log('initial state =>', store.getState())
@@ -142,7 +150,7 @@ store.dispatch(orderCake())
 store.dispatch(restockedCake(5))
 
 //useing bindActionCreators
-const actions = redux.bindActionCreators({restockedIceCream, orderIceCream}, store.dispatch)
+const actions = bindActionCreators({restockedIceCream, orderIceCream}, store.dispatch)
 
 actions.orderIceCream()
 actions.orderIceCream()
