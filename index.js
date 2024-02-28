@@ -2,6 +2,11 @@ const redux = require('redux');
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
 const combinReducer = redux.combineReducers;
+const applyMiddleware = redux.applyMiddleware;
+
+//redux middleware
+const reduxLogger = require('redux-logger');
+const logger = reduxLogger.createLogger();
 
 const CAKE_ORDERED = 'CAKE_ORDERD';
 const CAKE_RESTOCKED = "CAKE_RESTOCKED"
@@ -135,13 +140,18 @@ const rootReducer = combinReducer({
 })
 
 //create store, redux store holding the aplicatio state, reducer has the initial state
-const store = createStore(rootReducer)
+// const store = createStore(rootReducer)
+
+//pass middleware uin store
+const store = createStore(rootReducer, applyMiddleware(logger))
 
 //access to state via getState()
-console.log('initial state =>', store.getState())
+//remove to use loggemiddleware to handel it
+
+//console.log('initial state =>', store.getState())
 
 //allows the App to subscribe to changes in the store  subscribe(listener)
-const unsubscribe = store.subscribe(() => console.log('updated state =>', store.getState()))
+const unsubscribe = store.subscribe(() => {})
 
 //store provide dispatch() method to update the state
 store.dispatch(orderCake())
